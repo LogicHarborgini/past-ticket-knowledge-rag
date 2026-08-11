@@ -1,0 +1,97 @@
+{
+  "provider": "fake",
+  "model": "fake:canned-answer",
+  "note": "provider=fake: every criterion that judges model output was skipped. This score measures the harness, not answer quality.",
+  "overall_score": 1.0,
+  "cases": 4,
+  "results": [
+    {
+      "case_id": "EVAL-001",
+      "score": 1.0,
+      "retrieved": [
+        "HIST-009",
+        "HIST-014",
+        "HIST-005"
+      ],
+      "passed": [
+        "retrieved_something"
+      ],
+      "failed": [],
+      "skipped": [
+        "cites_a_retrieved_ticket",
+        "no_fabricated_ticket_ids",
+        "mentions_expected_ticket",
+        "declines_when_irrelevant",
+        "not_too_short",
+        "respects_length_guidance"
+      ],
+      "error": null
+    },
+    {
+      "case_id": "EVAL-002",
+      "score": 1.0,
+      "retrieved": [
+        "HIST-003",
+        "HIST-004",
+        "HIST-014"
+      ],
+      "passed": [
+        "retrieved_something"
+      ],
+      "failed": [],
+      "skipped": [
+        "cites_a_retrieved_ticket",
+        "no_fabricated_ticket_ids",
+        "mentions_expected_ticket",
+        "declines_when_irrelevant",
+        "not_too_short",
+        "respects_length_guidance"
+      ],
+      "error": null
+    },
+    {
+      "case_id": "EVAL-003",
+      "score": 1.0,
+      "retrieved": [
+        "HIST-008",
+        "HIST-007",
+        "HIST-004"
+      ],
+      "passed": [
+        "retrieved_something"
+      ],
+      "failed": [],
+      "skipped": [
+        "cites_a_retrieved_ticket",
+        "no_fabricated_ticket_ids",
+        "mentions_expected_ticket",
+        "declines_when_irrelevant",
+        "not_too_short",
+        "respects_length_guidance"
+      ],
+      "error": null
+    },
+    {
+      "case_id": "EVAL-004",
+      "score": 1.0,
+      "retrieved": [
+        "HIST-002",
+        "HIST-014",
+        "HIST-006"
+      ],
+      "passed": [
+        "retrieved_something"
+      ],
+      "failed": [],
+      "skipped": [
+        "cites_a_retrieved_ticket",
+        "no_fabricated_ticket_ids",
+        "mentions_expected_ticket",
+        "declines_when_irrelevant",
+        "not_too_short",
+        "respects_length_guidance"
+      ],
+      "error": null
+    }
+  ]
+}

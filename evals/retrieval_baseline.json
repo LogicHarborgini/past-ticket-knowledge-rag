@@ -1,0 +1,10 @@
+{
+  "embedding_model": "fake:keyword-embeddings",
+  "k": 3,
+  "score_threshold": null,
+  "cases": 14,
+  "hit_rate": 1.0,
+  "mrr": 0.9286,
+  "precision_at_k": 0.3571,
+  "misses": []
+}
