@@ -216,3 +216,19 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Local vector store — rebuilt from app/corpus.py with `python -m app.ingest`.
+# Committing it would version a binary index that goes stale the moment the
+# embedding model changes.
+chroma_db/
+
+# Eval artefacts that are machine-specific rather than results worth tracking.
+.ragas_cache/
+
+# Second virtualenv for the RAGAS harness (see requirements-evals.txt).
+.venv-evals/
+
+# Analytics log. Rebuilt by running the service; not a source artefact, and it
+# accumulates real query text.
+*.db
+*.db-journal

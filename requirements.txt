@@ -1,0 +1,54 @@
+# Upper bounds are deliberate. An unpinned `langchain>=0.3` resolves to
+# langchain 1.x today — a major version jump that happens to work until it
+# doesn't. Ceilings keep the next install from silently landing on an
+# incompatible major. Versions below are the ones this project runs against.
+
+# Core AI stack
+# The `langchain` meta-package and `langchain-community` are deliberately absent.
+# Nothing under app/ or evals/ imports either one, and no installed package
+# depends on them — the code imports the provider packages below directly, so the
+# umbrella package would only add install weight and a second version to reason
+# about. (RAGAS does need langchain-community; that lives in requirements-evals.)
+langchain-aws>=1.6,<2          # Bedrock chat + Titan embeddings
+langchain-core>=1.5,<2
+langchain-ollama>=1.1,<2       # local fallback when AWS Bedrock is unavailable
+
+# Vector store
+# Chroma, not OpenSearch. The production pipeline this mirrors runs on Amazon
+# OpenSearch k-NN; Chroma gives the same retriever interface with no cluster to
+# provision, so `git clone && python -m app.ingest` works on any machine.
+langchain-chroma>=1.1,<2
+
+# Observability
+langsmith>=0.10,<1
+
+# Analytics log
+# SQLAlchemy rather than the stdlib sqlite3 module: the search log is SQLite in
+# development and should be Postgres in production, and that swap is a URL
+# change only if nothing in the code writes SQLite-specific SQL. Chroma already
+# pulls SQLAlchemy in transitively — pinned here because this project imports it
+# directly, and a dependency you rely on should not arrive by accident.
+SQLAlchemy>=2.0,<3
+
+# API layer
+fastapi>=0.141,<1
+uvicorn[standard]>=0.52,<1
+
+# Data validation
+pydantic>=2.13,<3
+pydantic-settings>=2.14,<3
+
+# AWS
+boto3>=1.43,<2
+
+# Utilities
+python-dotenv>=1.2,<2
+
+# Dev / testing
+pytest>=9.1,<10
+pytest-asyncio>=1.4,<2
+httpx>=0.28,<1                 # for FastAPI test client
+
+# RAGAS evaluation is NOT here on purpose — it pulls pandas, datasets and a
+# second LLM stack that the service itself never imports. See
+# requirements-evals.txt.

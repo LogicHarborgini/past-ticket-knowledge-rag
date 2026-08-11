@@ -1,0 +1,28 @@
+# RAGAS evaluation dependencies — for a SEPARATE virtualenv, not the app's.
+#
+#     python -m venv .venv-evals
+#     .venv-evals/Scripts/pip install -r requirements-evals.txt     # Windows
+#     .venv-evals/bin/pip install -r requirements-evals.txt         # macOS/Linux
+#
+# Why separate rather than `pip install -r requirements.txt -r requirements-evals.txt`:
+# RAGAS imports `langchain_community.chat_models.vertexai` at startup. That module
+# was removed in the langchain-community 0.4 line, which is what LangChain 1.x —
+# the version this application runs on — requires. Installing both into one
+# environment produces an ImportError on `import ragas` no matter which order you
+# install in.
+#
+# So the evaluation is split in two, with a JSON file between them:
+#
+#     python -m evals.ragas_collect              (app env — runs the pipeline)
+#     .venv-evals/Scripts/python -m evals.ragas_eval   (this env — scores it)
+#
+# evals/ragas_eval.py therefore imports nothing from `app`. Nothing else in the
+# project needs this environment.
+
+ragas>=0.2,<0.4
+langchain-community>=0.3,<0.4    # pinned to the line RAGAS still imports from
+
+# Judge model backends — install the one matching LLM_PROVIDER.
+langchain-aws>=0.2,<0.3          # Bedrock judge (Claude Haiku by default)
+langchain-ollama>=0.2,<0.3       # local judge
+# langchain-openai>=0.2,<0.3     # uncomment for LLM_PROVIDER=openai
